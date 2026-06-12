@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>illit — healthcare ops consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F5F0;
+    --ink:#1A0A2E;
+    --body:#5F5E5A;
+    --muted:#888780;
+    --pop:#C084FC;
+    --pop-deep:#9333EA;
+    --pop-bright:#E879F9;
+    --dark:#1A0A2E;
+    --lav:#F3E8FF;
+    --border:#E5E1F8;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--body);
+    font-family:'DM Sans',sans-serif;
+    font-size:16px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Abril Fatface',serif;
+    color:var(--ink);
+    font-weight:400;
+    text-transform:lowercase;
+    line-height:1.08;
+  }
+
+  p{max-width:620px;}
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{max-width:1160px;margin:0 auto;padding:0 40px;}
+
+  .eyebrow{
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--pop-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:var(--bg);
+    border-bottom:0.5px solid var(--border);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;max-width:1160px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:flex-end;gap:12px;position:relative;}
+  .brand .pixel{height:24px;width:auto;display:block;margin-bottom:6px;}
+  .wordmark{
+    font-family:'Abril Fatface',serif;
+    font-size:34px;color:var(--ink);
+    line-height:1;text-transform:lowercase;position:relative;
+  }
+  .brand .nav-underline{
+    position:absolute;left:0;bottom:-7px;width:62px;height:12px;
+    overflow:visible;
+  }
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{
+    font-weight:500;font-size:13px;color:#6B6A64;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--ink);}
+
+  /* ---------- BUTTONS ---------- */
+  .btn-wrap{position:relative;display:inline-block;}
+  .btn{
+    position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;
+    font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;
+    padding:15px 30px;border-radius:999px;cursor:pointer;border:none;
+    transition:transform .18s ease;
+  }
+  .btn-dark{background:var(--dark);color:#fff;}
+  .btn-pop{background:var(--pop);color:#fff;}
+  .btn-shadow{
+    position:absolute;inset:0;border-radius:999px;z-index:1;
+    transform:translate(4px,4px);
+  }
+  .btn-wrap:hover .btn{transform:translate(-1px,-1px);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;position:relative;
+    padding:120px 0 80px;
+  }
+  .hero .wrap{position:relative;width:100%;}
+  .hero h1{
+    font-size:76px;max-width:880px;position:relative;letter-spacing:-1px;
+  }
+  .accent-word{position:relative;display:inline-block;color:var(--pop-deep);}
+  .accent-word .blob{
+    position:absolute;z-index:-1;left:-14px;top:-8px;
+    width:calc(100% + 28px);height:calc(100% + 16px);overflow:visible;
+  }
+  .hero-underline{
+    position:absolute;left:-4px;bottom:-16px;width:calc(100% + 8px);height:18px;
+    overflow:visible;
+  }
+  .hero-sub{
+    font-size:18px;font-weight:400;color:var(--body);margin-top:34px;
+    max-width:600px;
+  }
+  .hero-cta{margin-top:42px;position:relative;display:inline-block;}
+  .arrow-anno{
+    position:absolute;left:230px;top:6px;width:200px;height:90px;
+    pointer-events:none;
+  }
+  .arrow-anno .label{
+    font-family:'DM Sans',sans-serif;font-size:12px;fill:var(--pop);
+    font-weight:500;
+  }
+  .hero-star{position:absolute;right:10px;top:-30px;width:120px;height:120px;}
+
+  /* ---------- SERVICES ---------- */
+  section{position:relative;}
+  .services{padding:110px 0;}
+  .sec-head{margin-bottom:54px;}
+  .sec-head h2{font-size:46px;margin-top:14px;max-width:680px;}
+  .cards{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:22px;
+  }
+  .card{
+    grid-column:span 2;
+    background:#fff;border:0.5px solid var(--border);border-radius:14px;
+    padding:28px;display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px -22px rgba(26,10,46,.35);}
+  .card.dark{background:var(--dark);}
+  .card .icon{height:40px;margin-bottom:20px;}
+  .card h3{font-size:20px;margin-bottom:10px;}
+  .card.dark h3{color:#fff;}
+  .card p{font-size:15px;line-height:1.6;margin-bottom:16px;flex:1;}
+  .card.dark p{color:#C9C4D6;}
+  .card .more{font-weight:500;font-size:14px;color:var(--pop-deep);}
+  .card.dark .more{color:var(--pop-bright);}
+  /* bottom row: 2 cards centered */
+  .card.row2{grid-column:span 3;}
+
+  /* ---------- WHY ---------- */
+  .why{padding:110px 0;position:relative;}
+  .why h2{font-size:46px;margin-top:14px;max-width:720px;position:relative;}
+  .why .blob-phrase{position:relative;display:inline-block;}
+  .why .blob-phrase .blob{
+    position:absolute;z-index:-1;left:-14px;top:-6px;
+    width:calc(100% + 28px);height:calc(100% + 16px);overflow:visible;
+  }
+  .why p{margin-top:28px;font-size:16px;}
+  .stats{display:flex;gap:22px;margin-top:50px;flex-wrap:wrap;}
+  .stat{
+    background:var(--lav);border-radius:14px;padding:28px 30px;flex:1;min-width:200px;
+    position:relative;
+  }
+  /* slight hand-placed tilt, like cards dropped in a notebook */
+  .stat:nth-child(1){transform:rotate(-1.3deg);}
+  .stat:nth-child(2){transform:rotate(0.8deg);}
+  .stat:nth-child(3){transform:rotate(-0.6deg);}
+  .stat .num{font-weight:700;font-size:30px;color:var(--ink);line-height:1.1;position:relative;display:inline-block;}
+  .stat .circle-doodle{position:absolute;left:-12px;top:-10px;width:calc(100% + 24px);height:calc(100% + 20px);overflow:visible;pointer-events:none;}
+
+  /* handwritten margin note */
+  .note{
+    position:relative;margin-top:34px;max-width:600px;
+    padding-left:34px;border-left:3px solid var(--lav);
+  }
+  .note-kicker{
+    display:inline-block;font-family:'DM Sans',sans-serif;font-weight:600;
+    font-size:12px;color:var(--pop-deep);transform:rotate(-3deg);margin-bottom:6px;
+  }
+  .note p{font-size:16px;line-height:1.7;color:var(--body);margin:0;}
+  .note em{font-style:italic;color:var(--ink);font-weight:500;}
+  .scribble{position:absolute;left:-2px;bottom:-9px;width:calc(100% + 6px);height:12px;overflow:visible;pointer-events:none;}
+  .ul-word{position:relative;display:inline-block;}
+  .stat .lab{font-weight:500;font-size:12px;color:#6B6A64;margin-top:8px;}
+  .why-figure{position:absolute;right:0;top:120px;width:120px;height:160px;opacity:.95;}
+  .why-star{position:absolute;right:150px;top:60px;width:60px;height:60px;}
+
+  /* ---------- FOOTER CTA ---------- */
+  .footer{
+    background:var(--dark);color:#fff;padding:110px 0 60px;position:relative;
+    overflow:hidden;
+  }
+  .footer h2{color:#fff;font-size:50px;max-width:760px;position:relative;}
+  .footer .foot-underline{
+    position:absolute;left:-4px;bottom:-12px;width:calc(100% + 8px);height:18px;
+    overflow:visible;
+  }
+  .footer .under-target{position:relative;display:inline-block;}
+  .footer p{color:var(--muted);margin-top:30px;font-size:16px;}
+  .footer .foot-cta{margin-top:42px;}
+  .foot-bottom{
+    margin-top:90px;font-size:12px;color:#9B9A93;
+    border-top:0.5px solid rgba(229,225,248,.15);padding-top:26px;
+  }
+  .foot-decor{position:absolute;opacity:.35;pointer-events:none;}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out, transform .5s ease-out;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero h1{font-size:58px;}
+    .sec-head h2,.why h2{font-size:38px;}
+    .footer h2{font-size:40px;}
+    .arrow-anno{left:200px;}
+    .why-figure{display:none;}
+  }
+  @media(max-width:760px){
+    .wrap{padding:0 24px;}
+    .nav-inner{padding:16px 24px;}
+    .nav-links{gap:20px;}
+    .cards{grid-template-columns:1fr;}
+    .card,.card.row2{grid-column:span 1;}
+    .hero h1{font-size:46px;}
+    .hero-star{width:80px;height:80px;top:-10px;right:0;}
+    .arrow-anno{position:static;display:block;width:200px;height:80px;margin-top:12px;}
+    .stats{flex-direction:column;}
+  }
+  @media(max-width:420px){
+    .wrap{padding:0 18px;}
+    .nav-inner{padding:14px 18px;}
+    .wordmark{font-size:28px;}
+    .brand .nav-underline{left:0;width:52px;}
+    .nav-links{gap:14px;}
+    .nav-links a{font-size:12px;}
+    .hero h1{font-size:38px;}
+    .sec-head h2,.why h2,.footer h2{font-size:31px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="wordmark">illit</span>
+      <!-- wobbly underline beneath wordmark -->
+      <svg class="nav-underline" viewBox="0 0 78 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 7 C 20 2, 40 11, 60 5 C 68 3, 73 6, 76 5" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="nav-links">
+      <a href="#services">services</a>
+      <a href="#about">about</a>
+      <a href="#contact">work with us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <!-- starburst top-right -->
+    <svg class="hero-star" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="#C084FC" stroke-width="3" stroke-linecap="round">
+        <line x1="60" y1="60" x2="60" y2="14"/>
+        <line x1="60" y1="60" x2="92" y2="28"/>
+        <line x1="60" y1="60" x2="106" y2="60"/>
+        <line x1="60" y1="60" x2="92" y2="92"/>
+        <line x1="60" y1="60" x2="60" y2="106"/>
+        <line x1="60" y1="60" x2="28" y2="92"/>
+        <line x1="60" y1="60" x2="14" y2="60"/>
+        <line x1="60" y1="60" x2="28" y2="28"/>
+      </g>
+      <circle cx="60" cy="60" r="7" fill="#C084FC"/>
+    </svg>
+
+    <h1>
+      healthcare ops,<br>
+      built for
+      <span class="accent-word">
+        <!-- blob highlight behind "you." -->
+        <svg class="blob" viewBox="0 0 160 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 30 C 8 12, 40 4, 78 6 C 120 8, 156 10, 152 40 C 150 66, 130 84, 80 82 C 34 80, 6 70, 12 30 Z" fill="#F3E8FF"/>
+        </svg>you.<!-- wobbly underline beneath you. -->
+        <svg class="hero-underline" viewBox="0 0 110 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 12 C 28 4, 52 18, 78 9 C 90 5, 100 11, 106 9" stroke="#C084FC" stroke-width="5" stroke-linecap="round" fill="none"/>
+        </svg></span>
+    </h1>
+
+    <p class="hero-sub">Independent practice consulting, RCM, and automation strategy — for practices done with the old way of doing things.</p>
+
+    <div class="hero-cta">
+      <div class="btn-wrap">
+        <span class="btn-shadow" style="background:#C084FC;opacity:.3;"></span>
+        <a href="#contact" class="btn btn-dark">let's talk →</a>
+      </div>
+      <!-- cartoon arrow + annotation pointing at CTA -->
+      <svg class="arrow-anno" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text class="label" x="64" y="20" transform="rotate(-7 64 20)">no forms. just a call.</text>
+        <path d="M70 34 C 40 44, 22 56, 14 66" stroke="#C084FC" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M14 66 L 26 62" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+        <path d="M14 66 L 20 55" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services reveal" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">what we do</span>
+      <h2>the full stack of practice
+        <span class="ul-word">operations.<svg class="scribble" viewBox="0 0 200 14" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 9 C 44 3, 84 14, 124 7 C 154 3, 182 11, 196 8" stroke="#C084FC" stroke-width="4" stroke-linecap="round" fill="none"/></svg></span>
+      </h2>
+    </div>
+    <div class="cards">
+
+      <!-- Card 1: Practice Consulting (house + cross) -->
+      <div class="card">
+        <svg class="icon" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M9 24 L9 41 L39 41 L39 24" stroke="#C084FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".2" transform="translate(3,3)"/>
+          <path d="M5 22 L24 6 L43 22" stroke="#C084FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".2" transform="translate(3,3)"/>
+          <path d="M9 24 L9 41 L39 41 L39 24" stroke="#1A0A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M5 22 L24 6 L43 22" stroke="#1A0A2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M24 26 L24 36 M19 31 L29 31" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <h3>independent practice consulting</h3>
+        <p>Stand up, stabilize, or scale your practice — operations designed around how you actually work.</p>
+        <a href="#contact" class="more">learn more →</a>
+      </div>
+
+      <!-- Card 2: RCM (dollar in circle) DARK -->
+      <div class="card dark">
+        <svg class="icon" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="22" r="16" stroke="#E879F9" stroke-width="3" fill="none" opacity=".25" transform="translate(3,3)"/>
+          <circle cx="24" cy="22" r="16" stroke="#E879F9" stroke-width="3" fill="none"/>
+          <path d="M28 16 C 26 13, 19 13, 19 18 C 19 23, 29 21, 29 26 C 29 31, 21 31, 19 28 M24 11 L24 33" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <h3>revenue cycle management</h3>
+        <p>Denials, utilization, credentialing, and clean claims — built so cash stops leaking out the back.</p>
+        <a href="#contact" class="more">learn more →</a>
+      </div>
+
+      <!-- Card 3: Clinical Ops (stethoscope) -->
+      <div class="card">
+        <svg class="icon" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g opacity=".2" transform="translate(3,3)">
+            <path d="M10 6 L10 18 C 10 27, 26 27, 26 18 L26 6" stroke="#C084FC" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M18 27 L18 33 C 18 39, 34 39, 34 33 L34 28" stroke="#C084FC" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="34" cy="24" r="4" stroke="#C084FC" stroke-width="3" fill="none"/>
+          </g>
+          <path d="M10 6 L10 18 C 10 27, 26 27, 26 18 L26 6" stroke="#1A0A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M18 27 L18 33 C 18 39, 34 39, 34 33 L34 28" stroke="#1A0A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="34" cy="24" r="4" stroke="#1A0A2E" stroke-width="3" fill="none"/>
+          <circle cx="10" cy="6" r="2.5" fill="#C084FC"/>
+          <circle cx="26" cy="6" r="2.5" fill="#C084FC"/>
+        </svg>
+        <h3>clinical &amp; provider ops</h3>
+        <p>Workflows, staffing models, and provider enablement that keep care moving and teams sane.</p>
+        <a href="#contact" class="more">learn more →</a>
+      </div>
+
+      <!-- Card 4: Automation (lightning) row2 -->
+      <div class="card row2">
+        <svg class="icon" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M27 4 L12 26 L23 26 L20 40 L36 17 L25 17 Z" fill="#C084FC" opacity=".2" transform="translate(3,3)"/>
+          <path d="M27 4 L12 26 L23 26 L20 40 L36 17 L25 17 Z" fill="#C084FC" stroke="#1A0A2E" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <h3>automation &amp; workflow strategy</h3>
+        <p>Map the busywork, then kill it — automations and systems that give your team their hours back.</p>
+        <a href="#contact" class="more">learn more →</a>
+      </div>
+
+      <!-- Card 5: Denials & UM (X crossed out) row2 DARK -->
+      <div class="card row2 dark">
+        <svg class="icon" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g opacity=".25" transform="translate(3,3)">
+            <path d="M12 10 L36 34 M36 10 L12 34" stroke="#E879F9" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <path d="M12 10 L36 34 M36 10 L12 34" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <path d="M4 30 C 18 22, 30 22, 44 14" stroke="#E879F9" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <h3>denials &amp; um management</h3>
+        <p>Fewer denials, faster appeals, tighter utilization review — fight back on the claims worth fighting.</p>
+        <a href="#contact" class="more">learn more →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ILLIT ============ -->
+<section class="why reveal" id="about">
+  <div class="wrap">
+    <span class="eyebrow">why illit</span>
+    <h2>built by someone who's<br>
+      <span class="blob-phrase">
+        <svg class="blob" viewBox="0 0 360 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M14 28 C 10 10, 80 4, 180 6 C 290 8, 350 8, 348 38 C 346 62, 280 76, 178 74 C 70 72, 8 64, 14 28 Z" fill="#F3E8FF"/>
+        </svg>been in the room.</span>
+    </h2>
+    <p>Not a vendor. Not a staffing agency. A
+      <span class="ul-word">former operator<svg class="scribble" viewBox="0 0 120 12" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 7 C 28 2, 52 11, 78 6 C 94 3, 108 8, 117 6" stroke="#C084FC" stroke-width="3" stroke-linecap="round" fill="none"/></svg></span>
+      who built RCM from zero, knows exactly where practices lose money, and has done the unglamorous parts herself.</p>
+
+    <!-- handwritten margin note -->
+    <div class="note">
+      <span class="note-kicker">↓ the part nobody else wants to touch</span>
+      <p>We pull your credentialing turnaround times <em>way</em> down — and negotiate retroactive effective dates with payers, so you stop eating the cost of providers who technically can't bill yet. We work <em>nationwide</em>, and we help multi-state health tech companies scale their ops without the back office falling over.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">
+          &lt;5%
+          <svg class="circle-doodle" viewBox="0 0 110 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18 10 C 50 2, 92 4, 100 22 C 107 40, 86 60, 50 62 C 18 64, 2 50, 6 32 C 8 20, 12 13, 22 9" stroke="#C084FC" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="lab">denial rate achieved</div>
+      </div>
+      <div class="stat">
+        <div class="num">nationwide</div>
+        <div class="lab">credentialing &amp; rcm coverage</div>
+      </div>
+      <div class="stat">
+        <div class="num">multi-state</div>
+        <div class="lab">health tech, built to scale</div>
+      </div>
+    </div>
+
+    <!-- little hand-drawn star in the margin -->
+    <svg class="why-star" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="#C084FC" stroke-width="3" stroke-linecap="round">
+        <line x1="30" y1="30" x2="30" y2="6"/><line x1="30" y1="30" x2="44" y2="12"/>
+        <line x1="30" y1="30" x2="54" y2="30"/><line x1="30" y1="30" x2="44" y2="48"/>
+        <line x1="30" y1="30" x2="30" y2="54"/><line x1="30" y1="30" x2="16" y2="48"/>
+        <line x1="30" y1="30" x2="6" y2="30"/><line x1="30" y1="30" x2="16" y2="12"/>
+      </g>
+      <circle cx="30" cy="30" r="4" fill="#C084FC"/>
+    </svg>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER CTA ============ -->
+<footer class="footer reveal" id="contact">
+  <!-- scattered decorations -->
+  <svg class="foot-decor" style="top:60px;left:6%;width:60px;height:60px;" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#E879F9" stroke-width="3" stroke-linecap="round">
+      <line x1="30" y1="30" x2="30" y2="8"/><line x1="30" y1="30" x2="46" y2="14"/>
+      <line x1="30" y1="30" x2="52" y2="30"/><line x1="30" y1="30" x2="46" y2="46"/>
+      <line x1="30" y1="30" x2="30" y2="52"/><line x1="30" y1="30" x2="14" y2="46"/>
+      <line x1="30" y1="30" x2="8" y2="30"/><line x1="30" y1="30" x2="14" y2="14"/>
+    </g>
+    <circle cx="30" cy="30" r="4" fill="#E879F9"/>
+  </svg>
+  <svg class="foot-decor" style="top:140px;right:9%;width:50px;height:50px;" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#E879F9" stroke-width="3" stroke-linecap="round">
+      <line x1="25" y1="25" x2="25" y2="6"/><line x1="25" y1="25" x2="40" y2="10"/>
+      <line x1="25" y1="25" x2="44" y2="25"/><line x1="25" y1="25" x2="40" y2="40"/>
+      <line x1="25" y1="25" x2="25" y2="44"/><line x1="25" y1="25" x2="10" y2="40"/>
+      <line x1="25" y1="25" x2="6" y2="25"/><line x1="25" y1="25" x2="10" y2="10"/>
+    </g>
+    <circle cx="25" cy="25" r="3.5" fill="#E879F9"/>
+  </svg>
+  <svg class="foot-decor" style="bottom:120px;left:12%;width:120px;height:30px;" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 16 C 24 4, 44 28, 64 14 C 84 2, 104 24, 116 14" stroke="#E879F9" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </svg>
+  <svg class="foot-decor" style="bottom:80px;right:14%;width:80px;height:60px;" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M14 24 C 10 8, 44 4, 64 12 C 78 18, 74 44, 46 50 C 20 54, 8 44, 14 24 Z" fill="#E879F9"/>
+  </svg>
+
+  <div class="wrap">
+    <h2>ready to stop patching<br>and start
+      <span class="under-target">building?
+        <svg class="foot-underline" viewBox="0 0 200 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 11 C 50 3, 100 16, 150 8 C 170 5, 188 10, 196 8" stroke="#C084FC" stroke-width="5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </span>
+    </h2>
+    <p>illit works with a small number of clients at a time. Reach out to see if there's a fit.</p>
+    <div class="foot-cta">
+      <div class="btn-wrap">
+        <span class="btn-shadow" style="background:#C084FC;opacity:.25;"></span>
+        <a href="mailto:hello@illit.co" class="btn btn-pop">book a conversation →</a>
+      </div>
+    </div>
+    <div class="foot-bottom">illit consulting · northern virginia · nationwide</div>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
